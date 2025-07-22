@@ -1,9 +1,12 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:miniapp_web/gamer/gamer.dart';
 import 'package:miniapp_web/gamer/keyboard.dart';
 import 'package:miniapp_web/simple_l10n.dart';
 import 'package:miniapp_web/panel/page_portrait.dart';
+import 'package:web/web.dart' as web;
 
 class TetrisGameView extends StatefulWidget {
   const TetrisGameView({super.key});
@@ -38,7 +41,9 @@ class _TetrisGameViewState extends State<TetrisGameView> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).pop(); // or handle navigation as needed
+              final message = {'type': 'score-update', 'value': "onBack"};
+              // ignore: invalid_runtime_check_with_js_interop_types
+              web.window.parent?.postMessage(message as JSAny?, '*' as JSAny);
             },
           ),
           centerTitle: true,
