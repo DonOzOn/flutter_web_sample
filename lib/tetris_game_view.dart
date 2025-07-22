@@ -37,23 +37,6 @@ class _TetrisGameViewState extends State<TetrisGameView> {
       supportedLocales: S.supportedLocales,
       theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              final message = {'type': 'score-update', 'value': "onBack"};
-              // ignore: invalid_runtime_check_with_js_interop_types
-              web.window.parent?.postMessage(message as JSAny?, '*' as JSAny);
-            },
-          ),
-          centerTitle: true,
-          title: const Text(
-            'Tetris Game11',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: Colors.teal,
-          foregroundColor: Colors.white,
-        ),
         body: const Game(child: KeyboardController(child: PagePortrait())),
       ),
     );
