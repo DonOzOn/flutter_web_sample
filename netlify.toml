@@ -1,10 +1,10 @@
 [build]
   publish = "build/web"
   command = """
-    if [ ! -d "/opt/flutter" ]; then
-      git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
+    if [ ! -d "flutter" ]; then
+      git clone https://github.com/flutter/flutter.git -b stable --depth 1 flutter
     fi &&
-    export PATH="$PATH:/opt/flutter/bin" &&
+    export PATH="$PATH:$(pwd)/flutter/bin" &&
     flutter doctor &&
     flutter pub get &&
     flutter build web --release
