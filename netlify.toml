@@ -5,8 +5,8 @@
       git clone https://github.com/flutter/flutter.git -b stable --depth 1 flutter
     fi &&
     export PATH="$PATH:$(pwd)/flutter/bin" &&
-    flutter doctor &&
-    flutter pub get &&
+    flutter doctor --android-licenses ||true &&
+    flutter pub upgrade &&
     flutter build web --release
   """
 
