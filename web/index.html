@@ -27,6 +27,10 @@
   <script src="flutter.js" defer></script>
 
   <style>
+    html {
+      background-color: #2196F3; /* hoặc màu phù hợp với giao diện chính của bạn */
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -48,6 +52,7 @@
       color: white;
       font-size: 18px;
       z-index: 1000;
+      transition: opacity 0.3s ease-in-out;
     }
     
     .spinner {
@@ -85,7 +90,8 @@
             // Hide loading indicator
             const loading = document.getElementById('loading');
             if (loading) {
-              loading.style.display = 'none';
+              loading.style.opacity = '0';
+              setTimeout(() => loading.remove(), 300);
             }
             appRunner.runApp();
           });
