@@ -1,14 +1,20 @@
 [build]
   publish = "build/web"
   command = """
+    echo "🔄 Checking for Flutter SDK..." &&
     if [ ! -d "flutter" ]; then
+      echo "📥 Cloning Flutter SDK..."
       git clone https://github.com/flutter/flutter.git -b stable --depth 1 flutter
     fi &&
     export PATH="$PATH:$(pwd)/flutter/bin" &&
-    flutter doctor --android-licenses ||true &&
-    flutter pub upgrade &&
+    echo "🩺 Running flutter doctor..." &&
+    flutter doctor || true &&
+    echo "📦 Getting dependencies..." &&
+    flutter pub get &&
+    echo "🚧 Building Flutter Web app..." &&
     flutter build web --release
   """
+
 
 [[redirects]]
   from = "/*"
