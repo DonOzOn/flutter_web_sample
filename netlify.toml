@@ -1,6 +1,14 @@
 [build]
   publish = "build/web"
-  command = "flutter build web --release"
+  command = """
+    if [ ! -d "/opt/flutter" ]; then
+      git clone https://github.com/flutter/flutter.git -b stable --depth 1 /opt/flutter
+    fi &&
+    export PATH="$PATH:/opt/flutter/bin" &&
+    flutter doctor &&
+    flutter pub get &&
+    flutter build web --release
+  """
 
 [[redirects]]
   from = "/*"
