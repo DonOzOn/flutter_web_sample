@@ -1,0 +1,4 @@
+# Netlify redirects file for Flutter web
+# This ensures all routes are handled by Flutter's client-side routing
+
+/*    /index.html   200
