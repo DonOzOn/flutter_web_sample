@@ -1,0 +1,17 @@
+flutter:
+  assets:
+    - assets/material.png
+    - assets/audios/
+    - assets/alipay.jpg
+    - assets/wechat.png
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
+
+web:
+  # Web-specific configurations
+  bootstrap: true
