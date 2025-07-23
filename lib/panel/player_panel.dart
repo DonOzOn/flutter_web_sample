@@ -16,11 +16,9 @@ class PlayerPanel extends StatelessWidget {
   //the size of player panel
   final Size size;
 
-  PlayerPanel({
-    super.key,
-    required double width,
-  })  : assert(width != 0),
-        size = Size(width, width * 2);
+  PlayerPanel({super.key, required double width})
+    : assert(width != 0),
+      size = Size(width, width * 2);
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +31,7 @@ class PlayerPanel extends StatelessWidget {
           border: Border.all(color: Colors.black),
           color: Colors.white.withOpacity(0.1),
         ),
-        child: Stack(
-          children: <Widget>[
-            _PlayerPad(),
-            _GameUninitialized(),
-          ],
-        ),
+        child: Stack(children: <Widget>[_PlayerPad(), _GameUninitialized()]),
       ),
     );
   }
@@ -48,43 +41,45 @@ class _PlayerPad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint("_PlayerPad build started");
-    
+
     try {
       final gameState = GameState.of(context);
       debugPrint("Game data rows: ${gameState.data.length}");
       debugPrint("Game state: ${gameState.states}");
-      
+
       if (gameState.data.isEmpty) {
         debugPrint("Game data is empty, creating fallback");
         return _createFallbackGrid();
       }
-      
+
       return Column(
-        children: gameState.data.asMap().entries.map((entry) {
-          final rowIndex = entry.key;
-          final list = entry.value;
-          if (list.isEmpty) {
-            debugPrint("Row $rowIndex is empty");
-            return Container();
-          }
-          return Row(
-            children: list.asMap().entries.map((colEntry) {
-              final colIndex = colEntry.key;
-              final b = colEntry.value;
-              
-              Widget brick;
-              if (b == 1) {
-                brick = const Brick.normal();
-              } else if (b == 2) {
-                brick = const Brick.highlight();
-              } else {
-                brick = const Brick.empty();
+        children:
+            gameState.data.asMap().entries.map((entry) {
+              final rowIndex = entry.key;
+              final list = entry.value;
+              if (list.isEmpty) {
+                debugPrint("Row $rowIndex is empty");
+                return Container();
               }
-              
-              return brick;
+              return Row(
+                children:
+                    list.asMap().entries.map((colEntry) {
+                      final colIndex = colEntry.key;
+                      final b = colEntry.value;
+
+                      Widget brick;
+                      if (b == 1) {
+                        brick = const Brick.normal();
+                      } else if (b == 2) {
+                        brick = const Brick.highlight();
+                      } else {
+                        brick = const Brick.empty();
+                      }
+
+                      return brick;
+                    }).toList(),
+              );
             }).toList(),
-          );
-        }).toList(),
       );
     } catch (e) {
       debugPrint("Error in _PlayerPad: $e");
@@ -110,11 +105,11 @@ class _GameUninitialized extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint("_GameUninitialized build started");
-    
+
     try {
       final gameState = GameState.of(context);
       debugPrint("Game state in uninitialized: ${gameState.states}");
-      
+
       if (gameState.states == GameStates.none) {
         return Container(
           color: Colors.black.withOpacity(0.7),
@@ -122,11 +117,7 @@ class _GameUninitialized extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Icon(
-                  Icons.games,
-                  size: 60,
-                  color: Colors.white,
-                ),
+                Icon(Icons.games, size: 60, color: Colors.white),
                 SizedBox(height: 16),
                 Text(
                   "TETRIS",
@@ -138,19 +129,13 @@ class _GameUninitialized extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  "Press SPACE or tap DROP to start!",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white70,
-                  ),
+                  "Press SPACE or tap DROP to start! Don",
+                  style: TextStyle(fontSize: 14, color: Colors.white70),
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "Use arrow keys to move pieces",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white60,
-                  ),
+                  "Use arrow keys to move pieces Don",
+                  style: TextStyle(fontSize: 12, color: Colors.white60),
                 ),
               ],
             ),
@@ -168,11 +153,7 @@ class _GameUninitialized extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Icon(
-                Icons.games,
-                size: 60,
-                color: Colors.white,
-              ),
+              Icon(Icons.games, size: 60, color: Colors.white),
               SizedBox(height: 16),
               Text(
                 "TETRIS",
@@ -185,10 +166,7 @@ class _GameUninitialized extends StatelessWidget {
               SizedBox(height: 8),
               Text(
                 "Press SPACE or tap DROP to start!",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white70,
-                ),
+                style: TextStyle(fontSize: 14, color: Colors.white70),
               ),
             ],
           ),
